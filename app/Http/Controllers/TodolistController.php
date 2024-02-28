@@ -23,7 +23,7 @@ class TodolistController extends Controller
 
         // }
         return view('show', compact('data'));
-        
+
     }
 
     /**
@@ -31,7 +31,7 @@ class TodolistController extends Controller
      */
     public function create()
     {
-        //
+        return view('add');
     }
 
     /**
@@ -39,7 +39,21 @@ class TodolistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $kegiatan = $request->input('kegiatan');
+        $tanggal = $request->input('tanggal');
+        $waktu = $request->input('waktu');
+        $keterangan = $request->input('keterangan');
+        $status = $request->input('status');
+
+        $save = new Todolist([
+            'kegiatan' => $kegiatan,
+            'tanggal' => $tanggal,
+            'waktu' => $waktu,
+            'keterangan' => $keterangan,
+            'status' => $status,
+        ]);
+        $save->save();
+        return redirect()->route('todolist');
     }
 
     /**
